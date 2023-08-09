@@ -80,9 +80,13 @@ def main():
     repo = init()
 
     if args.rerun or checkUpdate(repo):
-        # checkIPv4(args.country)
         for code in args.country:
-            checkIPv4(code)
+            data = checkIPv4(code)
+
+            picklename = code + ".data.pickle"
+            with open(picklename, "wb") as file:
+                pickle.dump(data, file)
+
 
     repo.close()
 
